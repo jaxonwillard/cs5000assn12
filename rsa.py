@@ -4,8 +4,8 @@
 #############################################################
 # module: rsa.py
 # description: RSA
-# YOUR NAME
-# YOUR A-NUMBER
+# Jaxon Willard
+# A02088218
 ##############################################################
 
 
@@ -37,20 +37,8 @@ class rsa(object):
         ### your code here
         
         n = p*q
-        i = 17
-        e
-        while True:
-          print(n, i, xgcd(i, euler_phi(n)))
-          if xgcd(i, euler_phi(n))[0] == 1:
-            e = i
-            break
-          i += 2
-          if i > n:
-             break
-        d = mult_inv(e,n) 
-        
-        print('e', e)
-        return ((e,n), (d,n))
+        d = mult_inv(e,n)
+        return ((e,n), (mult_inv(e,(p-1)*(q-1)), n))
 
         
 

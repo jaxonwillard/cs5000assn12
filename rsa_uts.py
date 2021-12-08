@@ -41,7 +41,7 @@ class rsa_uts(unittest.TestCase):
     # def test_mult_inv_02(self):
     #     print('test_mult_inv_02() ...')
     #     for a in z_star_sub_n(7):
-    #         print('a = {}'.format(a))
+    #         # print('a = {}'.format(a))
     #         ## delete assert in front of x
     #         x = mult_inv(a, 7)
     #         assert a*x % 7 == 1
@@ -127,17 +127,17 @@ class rsa_uts(unittest.TestCase):
                         assert d == secret_key[0] and secret_key[1] == n
         print('test_generate_keys_from_pqe() passed...')
 #     ### unit test 1 for subproblem 1.7
-#     def test_encrypt_decrypt_01(self):
-#         print('test_encrypt_decrypt_01() ...')        
-#         p, q, e = 11, 29, 3
-#         epn = euler_phi(p*q)
-#         assert epn == (11-1)*(29-1)
-#         assert xgcd(epn, 3)[0] == 1
-#         pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-#         M = 100
-#         assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
-#         assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
-#         print('test_encrypt_decrypt_01() passed ...')                
+    # def test_encrypt_decrypt_01(self):
+    #     print('test_encrypt_decrypt_01() ...')        
+    #     p, q, e = 11, 29, 3
+    #     epn = euler_phi(p*q)
+    #     assert epn == (11-1)*(29-1)
+    #     assert xgcd(epn, 3)[0] == 1
+    #     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+    #     M = 100
+    #     assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
+    #     assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
+    #     print('test_encrypt_decrypt_01() passed ...')                
     
 #     ### unit test 2 for subproblem 1.7 
 #     def test_encrypt_decrypt_02(self):

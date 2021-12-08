@@ -32,10 +32,7 @@ def mult_inv(a, n):
     """
     multiplicative inverse of a in Z^{*}_{n}.
     """
-    b = 0
-    while True:
-        if (a*b-1) % n == 0: return b
-        b +=1
+    return xgcd(a,n)[1] % n
 
 
 ### A tool you may want to use in your code.
