@@ -91,7 +91,7 @@ def euler_phi(n):
     primes = []
     for i in range(2,n+1):
       prime = True
-      for j in range(1,i):
+      for j in range(1,math.ceil(i / 2)):
         if xgcd(i,j)[0] != 1:
           prime = False
           break
