@@ -76,57 +76,56 @@ class rsa_uts(unittest.TestCase):
 #             assert mod_exp(a, b, n) == (a**b) % n
 #         print('test_mod_exp_02() passed ...')
     ### unit test 1 for subproblem 1.4      
-    def test_euler_phi_01(self):
-        print('test_euler_phi_01()...')
+    # def test_euler_phi_01(self):
+    #     print('test_euler_phi_01()...')
         
-        assert euler_phi(45) == 24
-        print('test_euler_phi_02() passed...')
-    ## unit test 2 for subproblem 1.4         
-    def test_euler_phi_02(self):
-        print('test_euler_phi_02()...')
+    #     assert euler_phi(45) == 24
+    #     print('test_euler_phi_02() passed...')
+    # ## unit test 2 for subproblem 1.4         
+    # def test_euler_phi_02(self):
+    #     print('test_euler_phi_02()...')
+    #     nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
+    #             47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    #     for p in nums:
+    #         assert euler_phi(p) == p-1
+    #     for p in nums:
+    #         for q in nums:
+    #             if p != q:
+    #                 assert euler_phi(p*q) == (p-1)*(q-1)
+    #     print('test_euler_phi_02() passed...')
+#     ### unit test for subproblem 1.5     
+    # def test_choose_e(self):
+    #     print('test_choose_e()...')
+    #     nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 
+    #             47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    #     for p in nums:
+    #         for q in nums:
+    #             if p != q:
+    #                 eu_phi_n = (p-1)*(q-1)
+    #                 if eu_phi_n > 20:
+    #                     e = rsa.choose_e(eu_phi_n)
+    #                     assert xgcd(eu_phi_n, e)[0] == 1
+    #     print('test_choose_e() passed...')
+    ### unit test for subproblem 1.6     
+    def test_generate_keys_from_pqe(self):
+        print('test_generate_keys_from_pqe()...')
         nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
                 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
         for p in nums:
-            print(p)
-            assert euler_phi(p) == p-1
-        for p in nums:
             for q in nums:
                 if p != q:
-                    print(p,q)
-                    assert euler_phi(p*q) == (p-1)*(q-1)
-        print('test_euler_phi_02() passed...')
-#     ### unit test for subproblem 1.5     
-#     def test_choose_e(self):
-#         print('test_choose_e()...')
-#         nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 
-#                 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-#         for p in nums:
-#             for q in nums:
-#                 if p != q:
-#                     eu_phi_n = (p-1)*(q-1)
-#                     if eu_phi_n > 20:
-#                         e = rsa.choose_e(eu_phi_n)
-#                         assert xgcd(eu_phi_n, e)[0] == 1
-#         print('test_choose_e() passed...')
-#     ### unit test for subproblem 1.6     
-#     def test_generate_keys_from_pqe(self):
-#         print('test_generate_keys_from_pqe()...')
-#         nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
-#                 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-#         for p in nums:
-#             for q in nums:
-#                 if p != q:
-#                     eu_phi_n = (p-1)*(q-1)
-#                     if eu_phi_n > 20:
-#                         e = rsa.choose_e(eu_phi_n)
-#                         public_key, secret_key = rsa.generate_keys_from_pqe(p, q, 
-# e)
-#                         assert len(public_key) == len(secret_key) == 2
-#                         n = p*q
-#                         assert e == public_key[0] and public_key[1] == n
-#                         d = mult_inv(e, eu_phi_n)
-#                         assert d == secret_key[0] and secret_key[1] == n
-#         print('test_generate_keys_from_pqe() passed...')
+                    eu_phi_n = (p-1)*(q-1)
+                    if eu_phi_n > 20:
+                        e = rsa.choose_e(eu_phi_n)
+                        public_key, secret_key = rsa.generate_keys_from_pqe(p, q, e)
+                        assert len(public_key) == len(secret_key) == 2
+                        n = p*q
+                        print('e', 'n', 'pub', e, n, public_key)
+                        assert e == public_key[0] and public_key[1] == n
+                        d = mult_inv(e, eu_phi_n)
+                        print('d', 'n', 'secret', d, n, secret_key)
+                        assert d == secret_key[0] and secret_key[1] == n
+        print('test_generate_keys_from_pqe() passed...')
 #     ### unit test 1 for subproblem 1.7
 #     def test_encrypt_decrypt_01(self):
 #         print('test_encrypt_decrypt_01() ...')        
