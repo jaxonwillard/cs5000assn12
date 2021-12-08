@@ -17,45 +17,45 @@ from rsa import rsa
 from hack_rsa import hack_rsa
 class rsa_uts(unittest.TestCase):
     ### unit test for subproblem 1.1
-    def test_xgcd(self, lwr=1, uppr=1000000, ntests=100000):
-        print('test_xgcd() ...')
-        for _ in range(ntests):
-            a = random.randint(lwr, uppr)
-            b = random.randint(lwr, uppr)
-            g, x, y = xgcd(a, b)
-            assert g == a*x + b*y
-            #print('{} == {}{} + {}{}'.format(g, a, x, b, y))
-            gcd_bound = int(min(math.sqrt(a), math.sqrt(b)))
-            for d in range(g+1, gcd_bound+1):
-                assert not (a % d == 0 and b % d == 0)
-        print('test_xgcd() passed...')
-    ### unit test 1 for subproblem 1.2
-    def test_mult_inv_01(self):
-        print('test_mult_inv_01() ...')
-        ### 2 * 13 <> 1 (mod 1), so 2 = 13^-1 (mod 5)
-        assert 2 == mult_inv(13, 5)
-        ### 8 * 5 <> 1 (mod 13), so 8 = 5^-1 (mod 13)
-        assert 8 == mult_inv(5, 13)
-        print('test_mult_inv_01() passed...')
-    ### unit test 2 for subproblem 1.2        
-    def test_mult_inv_02(self):
-        print('test_mult_inv_02() ...')
-        for a in z_star_sub_n(7):
-            print('a = {}'.format(a))
-            ## delete assert in front of x
-            x = mult_inv(a, 7)
-            assert a*x % 7 == 1
-            print('{}{} % {} == 1'.format(a, x, 7))
-        print('test_mult_inv_02() passed...')
-    ### unit test 3 for subproblem 1.2                    
-    def test_mult_inv_03(self):
-        print('test_mult_inv_03() ...')
-        for a in z_star_sub_n(211):
-            # assert x == mult_inv(a, 211)
-            x = mult_inv(a, 211)
-            assert a*x % 211 == 1
-            #print('{}{} % {} == 1'.format(a, x, 211))
-        print('test_mult_inv_03() ...')
+    # def test_xgcd(self, lwr=1, uppr=1000000, ntests=100000):
+    #     print('test_xgcd() ...')
+    #     for _ in range(ntests):
+    #         a = random.randint(lwr, uppr)
+    #         b = random.randint(lwr, uppr)
+    #         g, x, y = xgcd(a, b)
+    #         assert g == a*x + b*y
+    #         #print('{} == {}{} + {}{}'.format(g, a, x, b, y))
+    #         gcd_bound = int(min(math.sqrt(a), math.sqrt(b)))
+    #         for d in range(g+1, gcd_bound+1):
+    #             assert not (a % d == 0 and b % d == 0)
+    #     print('test_xgcd() passed...')
+    # ### unit test 1 for subproblem 1.2
+    # def test_mult_inv_01(self):
+    #     print('test_mult_inv_01() ...')
+    #     ### 2 * 13 <> 1 (mod 1), so 2 = 13^-1 (mod 5)
+    #     assert 2 == mult_inv(13, 5)
+    #     ### 8 * 5 <> 1 (mod 13), so 8 = 5^-1 (mod 13)
+    #     assert 8 == mult_inv(5, 13)
+    #     print('test_mult_inv_01() passed...')
+    # ### unit test 2 for subproblem 1.2        
+    # def test_mult_inv_02(self):
+    #     print('test_mult_inv_02() ...')
+    #     for a in z_star_sub_n(7):
+    #         print('a = {}'.format(a))
+    #         ## delete assert in front of x
+    #         x = mult_inv(a, 7)
+    #         assert a*x % 7 == 1
+    #         print('{}{} % {} == 1'.format(a, x, 7))
+    #     print('test_mult_inv_02() passed...')
+    # ### unit test 3 for subproblem 1.2                    
+    # def test_mult_inv_03(self):
+    #     print('test_mult_inv_03() ...')
+    #     for a in z_star_sub_n(211):
+    #         # assert x == mult_inv(a, 211)
+    #         x = mult_inv(a, 211)
+    #         assert a*x % 211 == 1
+    #         #print('{}{} % {} == 1'.format(a, x, 211))
+    #     print('test_mult_inv_03() ...')
 #     ### unit test 1 for subproblem 1.3                                
 #     def test_mod_exp_01(self):
 #         print('test_mod_exp_01() ...')
@@ -66,7 +66,7 @@ class rsa_uts(unittest.TestCase):
 #             assert mod_exp(a, 1, 211) == a
 #             #print('mod_exp({}, 1, 211) == {}'.format(a, a))
 #         print('test_mod_exp_01() passed ...')
-#     ### unit test 2 for subproblem 1.3                                
+# #     ### unit test 2 for subproblem 1.3                                
 #     def test_mod_exp_02(self, numtests=1000):
 #         print('test_mod_exp_02()...')
 #         for _ in range(numtests):
@@ -75,23 +75,26 @@ class rsa_uts(unittest.TestCase):
 #             n = random.randint(2, 1000)
 #             assert mod_exp(a, b, n) == (a**b) % n
 #         print('test_mod_exp_02() passed ...')
-#     ### unit test 1 for subproblem 1.4      
-#     def test_euler_phi_01(self):
-#         print('test_euler_phi_01()...')
-#         assert euler_phi(45) == 24
-#         print('test_euler_phi_02() passed...')
-#     ### unit test 2 for subproblem 1.4         
-#     def test_euler_phi_02(self):
-#         print('test_euler_phi_02()...')
-#         nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
-#                 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-#         for p in nums:
-#             assert euler_phi(p) == p-1
-#         for p in nums:
-#             for q in nums:
-#                 if p != q:
-#                     assert euler_phi(p*q) == (p-1)*(q-1)
-#         print('test_euler_phi_02() passed...')
+    ### unit test 1 for subproblem 1.4      
+    def test_euler_phi_01(self):
+        print('test_euler_phi_01()...')
+        
+        assert euler_phi(45) == 24
+        print('test_euler_phi_02() passed...')
+    ## unit test 2 for subproblem 1.4         
+    def test_euler_phi_02(self):
+        print('test_euler_phi_02()...')
+        nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
+                47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+        for p in nums:
+            print(p)
+            assert euler_phi(p) == p-1
+        for p in nums:
+            for q in nums:
+                if p != q:
+                    print(p,q)
+                    assert euler_phi(p*q) == (p-1)*(q-1)
+        print('test_euler_phi_02() passed...')
 #     ### unit test for subproblem 1.5     
 #     def test_choose_e(self):
 #         print('test_choose_e()...')

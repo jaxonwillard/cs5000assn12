@@ -4,8 +4,8 @@
 #############################################################
 # module: rsa_aux.py
 # description: auxiliay functions for RSA
-# YOUR NAME
-# YOUR A-NUMBER
+# Jaxon Willard
+# A02088218
 ##############################################################
 
 import numpy as np
@@ -32,7 +32,6 @@ def mult_inv(a, n):
     """
     multiplicative inverse of a in Z^{*}_{n}.
     """
-    ### your code here
     b = 0
     while True:
         if (a*b-1) % n == 0: return b
@@ -65,19 +64,47 @@ def is_prime(n):
 def find_primes_in_range(a, b):
     return [i for i in range(a, b+1) if is_prime(i)]
 
+
 ### Assign 12, subproblem 1.3.
 def mod_exp(a, b, n):
     """
     this function computes a^b mod n.
     """
-    ### your code here
-    pass
+    return a ** b % n
+    # c = 0
+    # d = 1
+    # binRep = bin(b)[2:]
+    # for i in reversed(binRep):
+    #   print('i', i)
+    #   c = 2 * c
+    #   d = d * d % n
+    #   if i == 1:
+    #     c = c + 1
+    #     d = d * a % n
+    # print(a ** b % n, d)
+    # return d
+
 
 ### Assign 12, subproblem 1.4
 def euler_phi(n):
     """ Euler's Totient """
-    ### your code here
-    pass
+    primes = []
+    for i in range(2,n+1):
+      prime = True
+      for j in range(1,i):
+        if xgcd(i,j)[0] != 1:
+          prime = False
+          break
+      if prime and n % i == 0:
+        primes.append(i)
+
+    phi = n
+    for prime in primes:
+      phi *= (1 - (1 / prime))
+    
+    return int(phi) 
+
+    
 
     
 
