@@ -21,13 +21,38 @@ class rsa(object):
     @staticmethod
     def choose_e(eu_phi_n):
         ### your code here
+        lwr = 11
+        nums = []
+        for i in range(lwr, eu_phi_n-1):
+          if (xgcd(i,eu_phi_n)[0] == 1):
+            nums.append(i)
+
+        return nums[random.randint(0, len(nums)-1)]
+
         pass
 
     ### Assign 12, subproblem 1.6
     @staticmethod
     def generate_keys_from_pqe(p, q, e):
         ### your code here
-        pass
+        
+        n = p*q
+        i = 17
+        e
+        while True:
+          print(n, i, xgcd(i, euler_phi(n)))
+          if xgcd(i, euler_phi(n))[0] == 1:
+            e = i
+            break
+          i += 2
+          if i > n:
+             break
+        d = mult_inv(e,n) 
+        
+        print('e', e)
+        return ((e,n), (d,n))
+
+        
 
     ### Assign 12, subproblem 1.7    
     @staticmethod

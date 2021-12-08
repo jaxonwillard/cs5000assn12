@@ -85,6 +85,7 @@ def mod_exp(a, b, n):
     # return d
 
 
+
 ### Assign 12, subproblem 1.4
 def euler_phi(n):
     """ Euler's Totient """
